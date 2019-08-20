@@ -38,6 +38,7 @@ from tf_slim.data import tfexample_decoder
 from tf_slim import losses
 # from tensorflow import losses
 # -- from tensorflow.contrib import metrics
+from tf_slim import metrics
 # from tensorflow import metrics
 # -- from tensorflow.contrib.framework.python.ops.arg_scope import *
 # -- from tensorflow.contrib.framework.python.ops.variables import *

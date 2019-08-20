@@ -22,8 +22,8 @@ import math
 
 import numpy as np
 from six.moves import xrange  # pylint: disable=redefined-builtin
-from tensorflow.contrib import metrics as metrics_lib
-from tensorflow.contrib.metrics.python.ops import metric_ops
+from tf_slim import metrics as metrics_lib
+from tf_slim.metrics.ops import metric_ops
 from tensorflow.python.framework import constant_op
 from tensorflow.python.framework import dtypes as dtypes_lib
 from tensorflow.python.framework import errors_impl
