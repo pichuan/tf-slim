@@ -20,8 +20,8 @@ from __future__ import print_function
 # pylint: enable=unused-import
 
 import numpy as np
-from tensorflow.contrib.framework.python.ops import arg_scope
-from tensorflow.contrib.losses.python.losses import loss_ops
+from tf_slim.ops.arg_scope import arg_scope
+from tf_slim.losses.losses import loss_ops
 from tensorflow.python.framework import constant_op
 from tensorflow.python.framework import dtypes
 from tensorflow.python.framework import ops

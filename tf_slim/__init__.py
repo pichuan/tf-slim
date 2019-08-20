@@ -35,6 +35,7 @@ from tf_slim.data import tfexample_decoder
 
 # TODO(b/135606235): Delete non-slim imports
 # -- from tensorflow.contrib import losses
+from tf_slim import losses
 # from tensorflow import losses
 # -- from tensorflow.contrib import metrics
 # from tensorflow import metrics
