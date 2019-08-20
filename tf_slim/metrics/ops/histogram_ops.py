@@ -23,7 +23,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow.contrib.framework.python.framework import tensor_util
+from tensorflow.python.ops.confusion_matrix import remove_squeezable_dimensions
 from tensorflow.python.framework import constant_op
 from tensorflow.python.framework import dtypes
 from tensorflow.python.framework import ops
@@ -79,8 +79,7 @@ def auc_using_histogram(boolean_labels,
     collections = [ops.GraphKeys.LOCAL_VARIABLES]
   with variable_scope.variable_scope(
       name, 'auc_using_histogram', [boolean_labels, scores, score_range]):
-    scores, boolean_labels = tensor_util.remove_squeezable_dimensions(
-        scores, boolean_labels)
+    boolean_labels, scores = remove_squeezable_dimensions(boolean_labels, scores)
     score_range = ops.convert_to_tensor(score_range, name='score_range')
     boolean_labels, scores = _check_labels_and_scores(
         boolean_labels, scores, check_shape)
