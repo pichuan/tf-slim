@@ -7004,7 +7004,7 @@ class CountTest(test.TestCase):
 
       variables.local_variables_initializer().run()
       for i in range(4):
-        update_op.eval(feed_dict={values: feed_values[i]})
+        sess.run(update_op, feed_dict={values: feed_values[i]})
       self.assertAlmostEqual(3.4, result.eval(), 5)
 
   def test2dWeightedValues(self):
@@ -7053,7 +7053,7 @@ class CountTest(test.TestCase):
 
       variables.local_variables_initializer().run()
       for i in range(4):
-        update_op.eval(feed_dict={values: feed_values[i]})
+        sess.run(update_op, feed_dict={values: feed_values[i]})
       self.assertAlmostEqual(4.1, result.eval(), 5)
 
 

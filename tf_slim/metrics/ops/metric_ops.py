@@ -3608,7 +3608,7 @@ def streaming_concat(values,
     if not 0 <= axis < ndim:
       raise ValueError('axis = %r not in [0, %r)' % (axis, ndim))
 
-    fixed_shape = [dim.value for n, dim in enumerate(values_shape) if n != axis]
+    fixed_shape = [dim for n, dim in enumerate(values_shape) if n != axis]
     if any(value is None for value in fixed_shape):
       raise ValueError('all dimensions of `values` other than the dimension to '
                        'concatenate along must have statically known size')
