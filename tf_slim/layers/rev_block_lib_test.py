@@ -36,6 +36,9 @@ from tensorflow.python.ops import variable_scope
 from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 class RevBlockTest(test.TestCase):
   CHANNELS = 8

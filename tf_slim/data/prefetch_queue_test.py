@@ -36,6 +36,8 @@ from tensorflow.python.training import input as input_lib
 from tensorflow.python.training import queue_runner_impl
 # pylint:enable=g-direct-tensorflow-import
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
 
 class PrefetchQueueTest(test.TestCase):
 

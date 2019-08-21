@@ -30,6 +30,9 @@ from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 # pylint:enable=g-direct-tensorflow-import
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 class VGGATest(test.TestCase):
 

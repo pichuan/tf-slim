@@ -25,6 +25,9 @@ from tensorflow.python.ops import nn_ops
 from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 class SummariesTest(test.TestCase):
 

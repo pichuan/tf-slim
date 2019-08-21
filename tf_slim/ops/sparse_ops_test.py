@@ -26,6 +26,9 @@ from tensorflow.python.framework import sparse_tensor
 from tensorflow.python.ops import array_ops
 from tensorflow.python.platform import test
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 def _assert_sparse_tensor_value(test_case, expected, actual):
   test_case.assertEqual(np.int64, np.array(actual.indices).dtype)

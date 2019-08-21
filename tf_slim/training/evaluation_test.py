@@ -50,6 +50,9 @@ from tensorflow.python.training import basic_session_run_hooks
 from tensorflow.python.training import gradient_descent
 from tensorflow.python.training import saver as saver_lib
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 class CheckpointIteratorTest(test.TestCase):
 

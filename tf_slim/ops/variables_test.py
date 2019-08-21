@@ -43,6 +43,10 @@ from tensorflow.python.training import saver as saver_lib
 from tensorflow.errors import FailedPreconditionError
 from unittest import skip
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
+
 class LocalVariableTest(test.TestCase):
 
   def test_local_variable(self):

@@ -34,6 +34,9 @@ from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 from tensorflow.python.training import gradient_descent
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 def _setup_model():
   x = array_ops.placeholder(dtypes.float32, [])

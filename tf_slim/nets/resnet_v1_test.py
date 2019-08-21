@@ -37,6 +37,9 @@ from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 # pylint:enable=g-direct-tensorflow-import
 
+from tensorflow.compat.v1 import disable_eager_execution
+disable_eager_execution()
+
 
 def create_input(batch_size, height, width, channels):
   """Create test input tensor.

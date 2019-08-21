@@ -51,7 +51,4 @@ from tensorflow.python.util.all_util import make_all  # pylint:disable=g-direct-
 # pylint: enable=unused-import,line-too-long,g-importing-member,wildcard-import
 
 
-from tensorflow.compat.v1 import disable_eager_execution
-disable_eager_execution()
-
 __all__ = make_all(__name__)
