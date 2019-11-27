@@ -522,6 +522,7 @@ def inception_v3(inputs,
                  prediction_fn=layers_lib.softmax,
                  spatial_squeeze=True,
                  reuse=None,
+                 create_aux_logits=True,
                  scope='InceptionV3'):
   """Inception model from http://arxiv.org/abs/1512.00567.
 
@@ -583,40 +584,41 @@ def inception_v3(inputs,
           depth_multiplier=depth_multiplier)
 
       # Auxiliary Head logits
-      with arg_scope(
-          [layers.conv2d, layers_lib.max_pool2d, layers_lib.avg_pool2d],
-          stride=1,
-          padding='SAME'):
-        aux_logits = end_points['Mixed_6e']
-        with variable_scope.variable_scope('AuxLogits'):
-          aux_logits = layers_lib.avg_pool2d(
-              aux_logits, [5, 5],
-              stride=3,
-              padding='VALID',
-              scope='AvgPool_1a_5x5')
-          aux_logits = layers.conv2d(
-              aux_logits, depth(128), [1, 1], scope='Conv2d_1b_1x1')
+      if create_aux_logits and num_classes:
+        with arg_scope(
+            [layers.conv2d, layers_lib.max_pool2d, layers_lib.avg_pool2d],
+            stride=1,
+            padding='SAME'):
+          aux_logits = end_points['Mixed_6e']
+          with variable_scope.variable_scope('AuxLogits'):
+            aux_logits = layers_lib.avg_pool2d(
+                aux_logits, [5, 5],
+                stride=3,
+                padding='VALID',
+                scope='AvgPool_1a_5x5')
+            aux_logits = layers.conv2d(
+                aux_logits, depth(128), [1, 1], scope='Conv2d_1b_1x1')
 
-          # Shape of feature map before the final layer.
-          kernel_size = _reduced_kernel_size_for_small_input(aux_logits, [5, 5])
-          aux_logits = layers.conv2d(
-              aux_logits,
-              depth(768),
-              kernel_size,
-              weights_initializer=trunc_normal(0.01),
-              padding='VALID',
-              scope='Conv2d_2a_{}x{}'.format(*kernel_size))
-          aux_logits = layers.conv2d(
-              aux_logits,
-              num_classes, [1, 1],
-              activation_fn=None,
-              normalizer_fn=None,
-              weights_initializer=trunc_normal(0.001),
-              scope='Conv2d_2b_1x1')
-          if spatial_squeeze:
-            aux_logits = array_ops.squeeze(
-                aux_logits, [1, 2], name='SpatialSqueeze')
-          end_points['AuxLogits'] = aux_logits
+            # Shape of feature map before the final layer.
+            kernel_size = _reduced_kernel_size_for_small_input(aux_logits, [5, 5])
+            aux_logits = layers.conv2d(
+                aux_logits,
+                depth(768),
+                kernel_size,
+                weights_initializer=trunc_normal(0.01),
+                padding='VALID',
+                scope='Conv2d_2a_{}x{}'.format(*kernel_size))
+            aux_logits = layers.conv2d(
+                aux_logits,
+                num_classes, [1, 1],
+                activation_fn=None,
+                normalizer_fn=None,
+                weights_initializer=trunc_normal(0.001),
+                scope='Conv2d_2b_1x1')
+            if spatial_squeeze:
+              aux_logits = array_ops.squeeze(
+                  aux_logits, [1, 2], name='SpatialSqueeze')
+            end_points['AuxLogits'] = aux_logits
 
       # Final pooling and prediction
       with variable_scope.variable_scope('Logits'):
