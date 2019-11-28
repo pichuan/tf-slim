@@ -35,7 +35,7 @@ from tensorflow.python.framework import sparse_tensor
 from tensorflow.python.ops import array_ops
 from tensorflow.python.ops import control_flow_ops
 from tensorflow.python.ops import image_ops
-from tensorflow.python.ops import map_fn
+import tensorflow as tf
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import parsing_ops
 from tensorflow.python.ops import sparse_ops
@@ -399,8 +399,8 @@ class Image(ItemHandler):
     image_format = keys_to_tensors[self._format_key]
 
     if self._repeated:
-      return map_fn.map_fn(lambda x: self._decode(x, image_format),
-                           image_buffer, dtype=self._dtype)
+      return tf.map_fn(lambda x: self._decode(x, image_format),
+                       image_buffer, dtype=self._dtype)
     else:
       return self._decode(image_buffer, image_format)
 
